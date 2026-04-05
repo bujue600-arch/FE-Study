@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+
+    // const obj = {
+    //   name: "why",
+    //   age: 18,
+    //   sddress: "广州",
+
+    //   [Symbol.iterator]: function () {
+    //     let index = 0
+    //     const res = Object.entries(this)
+    //     const ObjInterator = {
+    //       next: function () {
+    //         if (index < res.length) {
+    //           return { done: false, value: res[index++] }
+    //         } else {
+    //           return { done: true }
+    //         }
+    //       }
+    //     }
+    //     return ObjInterator
+    //   }
+    // }
+
+    // for (const [key, value] of obj) {
+    //   console.log(key, ":", value)
+    // }
+
+    const p1 = Promise.resolve("hhh")
+    const p2 = Promise.resolve("mmm")
+    const p3 = Promise.resolve("ggg")
+
+    Promise.all([p1, p2, p3]).then(res => {
+      console.log(res)
+    })
+  </script>
+</body>
+
+</html>

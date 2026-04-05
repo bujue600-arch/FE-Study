@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <input type="file" id="fileInput">
+  <button id="uploadBtn">上传文件</button>
+
+
+  <script>
+
+    //文件上传
+    const fileInput = document.getElementById("fileInput")
+    const uploadBtn = document.getElementById("uploadBtn")
+
+    uploadBtn.onclick = () => {
+      const file = fileInput.files[0]
+      const formData = new FormData()
+      formData.append("file", file)
+
+      fetch("https://api.escuelajs.co/api/v1/files/upload", {
+        method: "POST",
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log("文件上传成功：", data)
+        })
+        .catch(error => {
+          console.error("文件上传失败：", error)
+        })
+
+      document.body.appendChild(fileInput)
+    }
+
+  </script>
+
+</body>
+
+</html>

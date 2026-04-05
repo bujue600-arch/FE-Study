@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+
+    function ajax(options) {
+      const xhr = new XMLHttpRequest()
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          options.success(xhr.response)
+        } else {
+          options.error(xhr.status)
+        }
+      }
+      xhr.open(options.method, options.url)
+      if (options.method.toLowerCase() === "post") {
+        xhr.setRequestHeader("Content-Type", "application/json")
+        xhr.send(JSON.stringify(options.data))
+      } else {
+        xhr.send()
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    //普通函数：不return任何值时，默认返回undefined
+    function foo() {
+      console.log("foo函数被调用了")
+    }
+    foo()
+
+    //异步函数：不return任何值时，默认返回一个被解决的Promise对象，值为undefined
+    async function bar() {
+      console.log("bar函数被调用了")
+    }
+    bar().then((res) => {
+      console.log("bar函数的返回值:" + res)
+    })
+  </script>
+
+
+</body>
+
+</html>

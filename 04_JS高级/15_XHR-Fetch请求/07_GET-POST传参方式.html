@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+
+    // 一、GET 方式传参
+    const xhr = new XMLHttpRequest()
+    xhr.onload = () => {
+      console.log(xhr.response)
+    }
+    xhr.open("get", "https://jsonplaceholder.typicode.com/todos/1")
+    xhr.send()
+
+
+    //二、POST 方式传参：URLencoded 字符串
+    const xhr4 = new XMLHttpRequest()
+    xhr4.onload = () => {
+      console.log(xhr4.response)
+    }
+    xhr4.open("post", "https://jsonplaceholder.typicode.com/posts")
+    xhr4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr4.send("title=foo&body=bar&userId=1")
+
+
+    // 三、POST 方式传参：FormData 对象
+    const xhr3 = new XMLHttpRequest()
+    xhr3.onload = () => {
+      console.log(xhr3.response)
+    }
+    xhr3.open("post", "https://jsonplaceholder.typicode.com/posts")
+    const formData = new FormData()
+    formData.append("title", "foo")
+    // 注意：使用 FormData 传参时，Content-Type 会自动设置为 multipart/form-data
+    xhr3.send(formData)
+
+
+    //四、POST 方式传参：json字符串
+    const xhr2 = new XMLHttpRequest()
+    xhr2.onload = () => {
+      console.log(xhr2.response)
+    }
+    xhr2.open("post", "https://jsonplaceholder.typicode.com/posts")
+    xhr2.setRequestHeader("Content-Type", "application/json")
+
+    xhr2.send(JSON.stringify({
+      title: 'foo',
+      body: 'bar',
+      userId: 1,
+    }))
+
+
+
+
+  </script>
+
+</body>
+
+</html>

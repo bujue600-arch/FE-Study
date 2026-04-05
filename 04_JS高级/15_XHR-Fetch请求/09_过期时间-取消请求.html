@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+
+    //加入过期时间和取消请求后的ajax封装方法
+    function ajax(options) {
+      const xhr = new XMLHttpRequest()
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          options.success(xhr.response)
+        } else {
+          options.error(xhr.status)
+        }
+      }
+      if (options.timeout) {
+        xhr.timeout = options.timeout
+        xhr.ontimeout = () => {
+          options.error("请求超时")
+        }
+      }
+      xhr.open(options.method, options.url)
+      if (options.method.toLowerCase() === "post") {
+        xhr.setRequestHeader("Content-Type", "application/json")
+        xhr.send(JSON.stringify(options.data))
+      } else {
+        xhr.send()
+      }
+
+      return xhr
+    }
+
+    const request = ajax({
+      method: "get",
+      url: "https://jsonplaceholder.typicode.com/todos/1",
+      timeout: 1000,
+      success: (response) => {
+        console.log("请求成功：", response)
+      },
+      error: (error) => {
+        console.log("请求失败：", error)
+      }
+    })
+
+    // 取消请求
+    // request.abort()
+
+  </script>
+
+
+</body>
+
+</html>

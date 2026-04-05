@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    //异步请求函数
+    function requestData(url, isSuccess = true) {
+      return new Promise((resolve, reject) => {
+        if (isSuccess) {
+          setTimeout(() => {
+            resolve(url)
+          }, 2000)
+        } else reject(url)
+      })
+    }
+
+
+    //第一种：回调地狱
+    // requestData("wh.com").then((res1) => {
+    //   console.log("第一次请求结果：" + res1)
+    //   requestData(res1 + "zjs.com").then((res2) => {
+    //     console.log("第二次请求结果：" + res2)
+    //     requestData(res2 + "zym.com").then((res3) => {
+    //       console.log("第三次请求结果：" + res3)
+    //     })
+    //   })
+    // })
+
+
+    //第二种：Promise链式调用
+    // requestData("wh.com").then((res1) => {
+    //   console.log("第一次请求结果：" + res1)
+    //   return requestData(res1 + "kobe.com")
+    // }).then((res2) => {
+    //   console.log("第二次请求结果：" + res2)
+    // })
+
+
+    //第三种：生成器函数
+    // function* getData() {
+    //   const res1 = yield requestData("wh.com")
+    //   const res2 = yield requestData(res1 + " kobe.com")
+    //   const res3 = yield requestData(res2 + " curry.com")
+    //   console.log(res3)
+    // }
+
+    // const generator = getData()
+
+    // generator.next().value.then((res1) => {
+    //   generator.next(res1).value.then((res2) => {
+    //     generator.next(res2).value.then((res3) => {
+    //       generator.next(res3)
+    //     })
+    //   })
+    // })
+
+    //第四种：async/await
+    async function getData() {
+      const res1 = await requestData("wh.com")
+      const res2 = await requestData(res1 + " kobe.com")
+      const res3 = await requestData(res2 + " curry.com")
+      console.log("最终请求结果：" + res3)
+    }
+    getData()
+
+  </script>
+
+
+</body>
+
+</html>
