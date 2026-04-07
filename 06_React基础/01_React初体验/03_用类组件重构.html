@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    //类组件
+    class App extends React.Component {
+
+      //组件数据
+      constructor() {
+        super()
+        this.state = {
+          message: "Hello,World!"
+        }
+      }
+
+      //组件方法
+      changeText() {
+        this.setState({
+          message: "Hello,React!"
+        })
+      }
+
+      //组件渲染
+      render() {
+        return (
+          <div>
+            <h2>{this.state.message}</h2>
+            <button onClick={this.changeText.bind(this)}>改变文本</button>
+          </div>
+        )
+      }
+    }
+
+    const app = ReactDOM.createRoot(document.querySelector("#root"))
+    app.render(<App />)
+
+
+  </script>
+
+</body>
+
+</html>
