@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          isReady: false,
+        }
+      }
+
+      changeReady() {
+        this.setState({
+          isReady: !this.state.isReady
+        })
+      }
+
+      render() {
+        const { isReady } = this.state
+
+        let message = null
+        if (isReady) {
+          message = "已准备"
+        } else {
+          message = "未准备"
+        }
+
+        return (
+          <div>
+            {/* 1.方式一: 根据条件给变量赋值不同的内容 */}
+            {message}
+            <button onClick={() => { this.changeReady() }}>改变准备状态</button>
+
+            {/* 2.方式二: 三元运算符 */}
+            <p>{isReady ? "已准备" : "未准备"}</p>
+
+            {/* 3.方式三: &&逻辑与运算 */}
+            {/* 场景: 当某一个值, 有可能为undefined时, 使用&&进行条件判断 */}
+            {isReady && <p>已准备</p>}
+            {!isReady && <p>未准备</p>}
+          </div>
+        )
+      }
+
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>
