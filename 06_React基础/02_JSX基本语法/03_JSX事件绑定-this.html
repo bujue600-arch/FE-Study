@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          counter: 100,
+        }
+      }
+
+      changeCounter() {
+        this.setState({
+          counter: 999,
+        })
+      }
+
+      //class fields方式定义的函数, 其内部的this会被自动绑定到当前组件实例上
+      changeCounter2 = () => {
+        this.setState({
+          counter: 999,
+        })
+      }
+
+
+
+      render() {
+        const { counter } = this.state
+        return (
+          <div>
+            <h2>{counter}</h2>
+
+            {/* 1.this绑定方式一: bind绑定 */}
+            <button onClick={this.changeCounter.bind(this)}>bind绑定</button>
+
+            {/* 2.this绑定方式二: 箭头函数 */}
+            <button onClick={() => this.changeCounter()}>箭头函数</button>
+
+            {/* 3.this绑定方式三: class fields */}
+            <button onClick={this.changeCounter2}>class fields</button>
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(<App />)
+
+  </script>
+
+</body>
+
+</html>
