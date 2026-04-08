@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          counter: 100,
+          message: "Hello,World!",
+          movies: ["111", "222", "333"],
+
+          wh: undefined,
+          kd: null,
+          bool: true,
+
+          friends: {
+            name: "kobe",
+            age: 30,
+          },
+
+          firstName: "kobe",
+          lastName: "bryant",
+
+          age: 20,
+        }
+      }
+
+      getMovieEls() {
+        const liEls = this.state.movies.map(movie => <li>{movie}</li>)
+        return liEls
+      }
+
+      render() {
+        const { counter, message, movies } = this.state
+
+        const { wh, kd, bool } = this.state
+
+        const { friends } = this.state
+
+        const { firstName, lastName } = this.state
+        const fullName = firstName + " " + lastName
+
+        const { age } = this.state
+        const ageText = age >= 18 ? "已成年" : "未成年"
+
+        const liEls = this.state.movies.map(movie => <li>{movie}</li>)
+
+        return (
+          <div>
+            {/* 1.Number/String/Array直接显示 */}
+            <p>{counter}</p>
+            <p>{message}</p>
+            <p>{movies.join(" ")}</p>
+
+            {/* 2.undefined/null/Boolean不显示 */}
+            <p>{wh}</p>
+            <p>{kd}</p>
+            <p>{bool}</p>
+
+            {/* 3.报错！Object类型不能作为子元素进行显示*/}
+            {/* <p>{friends}</p> */}
+
+            {/* 4.可以插入对应的表达式*/}
+            <h2>{10 + 20}</h2>
+            <h2>{firstName + " " + lastName}</h2>
+            <h2>{fullName}</h2>
+
+            {/* 5.可以插入三元运算符*/}
+            <h2>{ageText}</h2>
+            <h2>{age >= 18 ? "成年人" : "未成年人"}</h2>
+
+            {/* 6.可以调用方法获取结果*/}
+            <ul>{liEls}</ul>
+            <ul>{this.state.movies.map(movie => <li>{movie}</li>)}</ul>
+            <ul>{this.getMovieEls()}</ul>
+
+
+          </div>
+        )
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(<App />)
+
+  </script>
+
+
+</body>
+
+</html>

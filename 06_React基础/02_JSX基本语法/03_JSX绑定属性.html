@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          title: "基本属性title",
+          imgSrc: "https://gd-hbimg.huaban.com/200611eaedcf97c642f1ce0ec6a9c00168ed646d32d0a-xcR1Xp_fw658",
+          hrefSrc: "http://www.baidu.com",
+
+          isActive: true,
+
+          objStyle: { color: "red", fontSize: "30px" }
+        }
+      }
+
+      render() {
+        const { title, imgSrc, hrefSrc, isActive, objStyle } = this.state
+
+        // 需求: isActive: true -> active
+        // 1.class绑定的写法一: 字符串的拼接
+        const className = `abc cba ${isActive ? 'active' : ''}`
+        // 2.class绑定的写法二: 将所有的class放到数组中
+        const classList = ["abc", "cba"]
+        if (isActive) classList.push("active")
+        // 3.class绑定的写法三: 第三方库classnames -> npm install classnames
+
+        return (
+          <div>
+            { /* 1.基本属性绑定 */}
+            <p title={title}>哈哈哈</p>
+            {/* <img src={imgSrc} /> */}
+            <a href={hrefSrc}>点我跳转百度</a>
+
+            { /* 2.绑定class属性: 最好使用className */}
+            <p className={className}>hhh</p>
+            <p className={classList.join(",")}>mmm</p>
+
+            { /* 3.绑定style属性: 必须是对象类型 */}
+            <p style={{ color: "red", fontSize: "20px" }}>喵喵喵</p>
+            <p style={objStyle}>喵喵喵</p>
+          </div>
+        )
+      }
+
+    }
+
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render(<App />)
+
+  </script>
+</body>
+
+</html>
