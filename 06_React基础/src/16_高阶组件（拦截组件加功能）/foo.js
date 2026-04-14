@@ -13,7 +13,7 @@ function foo2(fn) {
   }, 2000)
 }
 
-foo2(function() {
+foo2(function () {
 
 })
 
@@ -28,4 +28,4 @@ function foo3() {
 }
 
 const fn = foo3()
-
+fn()
