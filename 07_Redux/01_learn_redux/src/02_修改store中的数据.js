@@ -17,3 +17,4 @@ console.log(store.getState())
 const counterAction = { type: "add_number", num: 10 }
 store.dispatch(counterAction)
 console.log(store.getState())
+
