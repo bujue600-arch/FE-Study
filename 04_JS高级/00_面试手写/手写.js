@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-
-<body>
-
-  <script>
-
-    Function.prototype.myApply = function (context, args) {
+Function.prototype.myApply = function (context, args) {
       context = context === null || context === undefined ? window : Object(context)
 
       context.fn = this
@@ -28,11 +15,3 @@
 
       delete context.fn
     }
-
-
-
-  </script>
-
-</body>
-
-</html>
